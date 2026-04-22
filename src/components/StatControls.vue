@@ -17,14 +17,15 @@ const stats = ['strength', 'agility', 'intelligence']
 
       <div class="mt-2 flex justify-center gap-2">
         <button
-          class="rounded bg-green-500 px-3"
+          class="rounded bg-green-500 px-4 py-1 hover:bg-green-600 disabled:opacity-50"
+          :disabled="character.points <= 0"
           @click="character.increaseStat(stat)"
         >
           +
         </button>
 
         <button
-          class="rounded bg-red-500 px-3"
+          class="rounded bg-red-500 px-4 py-1 hover:bg-red-600"
           @click="character.decreaseStat(stat)"
         >
           -

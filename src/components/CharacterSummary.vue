@@ -10,7 +10,7 @@ const character = useCharacterStore()
     <p>Total Stats: {{ character.totalStats }}</p>
 
     <button
-      class="mt-3 rounded bg-red-500 px-4 py-2"
+      class="mt-3 rounded bg-red-500 px-4 py-2 hover:bg-red-600"
       @click="character.resetCharacter"
     >
       Reset Character
