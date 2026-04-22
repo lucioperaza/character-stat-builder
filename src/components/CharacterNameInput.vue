@@ -13,6 +13,6 @@ const character = useCharacterStore()
       @input="character.setName($event.target.value)"
     />
 
-    <p class="font-bold">Name: {{ character.name }}</p>
+    <p class="font-bold">Name: {{ character.currentCharacter.name }}</p>
   </div>
 </template>

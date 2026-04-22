@@ -13,12 +13,12 @@ const stats = ['strength', 'agility', 'intelligence']
       :key="stat"
       class="text-center"
     >
-      <p class="capitalize">{{ stat }}: {{ character[stat] }}</p>
+      <p class="capitalize">{{ stat }}: {{ character.currentCharacter[stat] }}</p>
 
       <div class="mt-2 flex justify-center gap-2">
         <button
           class="rounded bg-green-500 px-4 py-1 hover:bg-green-600 disabled:opacity-50"
-          :disabled="character.points <= 0"
+          :disabled="character.currentCharacter.points <= 0"
           @click="character.increaseStat(stat)"
         >
           +
@@ -26,6 +26,7 @@ const stats = ['strength', 'agility', 'intelligence']
 
         <button
           class="rounded bg-red-500 px-4 py-1 hover:bg-red-600"
+          :disabled="character.currentCharacter[stat] <= 0"
           @click="character.decreaseStat(stat)"
         >
           -

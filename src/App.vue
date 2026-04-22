@@ -2,6 +2,7 @@
 import CharacterNameInput from './components/CharacterNameInput.vue'
 import StatControls from './components/StatControls.vue'
 import CharacterSummary from './components/CharacterSummary.vue'
+import CharacterList from './components/CharacterList.vue'
 </script>
 
 <template>
@@ -11,5 +12,8 @@ import CharacterSummary from './components/CharacterSummary.vue'
     <CharacterNameInput />
     <StatControls />
     <CharacterSummary />
+    <div>
+      <CharacterList />
+    </div>
   </div>
 </template>

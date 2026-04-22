@@ -6,7 +6,7 @@ const character = useCharacterStore()
 
 <template>
   <div class="mt-4 rounded bg-gray-800 p-5 text-center">
-    <p>Points Remaining: {{ character.points }}</p>
+    <p>Points Remaining: {{ character.currentCharacter.points }}</p>
     <p>Total Stats: {{ character.totalStats }}</p>
 
     <button
@@ -14,6 +14,12 @@ const character = useCharacterStore()
       @click="character.resetCharacter"
     >
       Reset Character
+    </button>
+    <button
+      class="m-3 rounded bg-blue-500 px-4 py-2 hover:bg-blue-600"
+      @click="character.saveCharacter"
+    >
+      Save Character
     </button>
   </div>
 </template>

@@ -2,44 +2,82 @@ import { defineStore } from 'pinia'
 
 export const useCharacterStore = defineStore('character', {
   state: () => ({
-    name: '',
-    strength: 5,
-    agility: 5,
-    intelligence: 5,
-    points: 10,
+    characters: [],
+    currentCharacter: {
+      id: null,
+      name: '',
+      strength: 5,
+      agility: 5,
+      intelligence: 5,
+      points: 10,
+    },
   }),
 
   getters: {
-    totalStats: (state) => state.strength + state.agility + state.intelligence,
-
-    isPointsRemaining: (state) => state.points > 0,
+    totalStats: (state) => {
+      const c = state.currentCharacter
+      return c.strength + c.agility + c.intelligence
+    },
+    isPointsRemaining: (state) => {
+      return state.currentCharacter.points > 0
+    },
   },
 
   actions: {
     setName(newName) {
-      this.name = newName
+      this.currentCharacter.name = newName
     },
 
     increaseStat(stat) {
-      if (this.points > 0) {
-        this[stat]++
-        this.points--
+      if (this.currentCharacter.points > 0) {
+        this.currentCharacter[stat]++
+        this.currentCharacter.points--
       }
     },
 
     decreaseStat(stat) {
-      if (this[stat] > 0) {
-        this[stat]--
-        this.points++
+      if (this.currentCharacter[stat] > 0) {
+        this.currentCharacter[stat]--
+        this.currentCharacter.points++
       }
     },
 
+    saveCharacter() {
+      if (!this.currentCharacter.name) return
+
+      const newCharacter = {
+        ...this.currentCharacter,
+        id: Date.now(),
+      }
+
+      this.characters.push(newCharacter)
+      this.resetCharacter()
+    },
+
+    selectCharacter(character) {
+      const totalUsed = character.strength + character.agility + character.intelligence
+
+      const maxPoints = 25
+
+      this.currentCharacter = {
+        ...character,
+        points: maxPoints - totalUsed,
+      }
+    },
+
+    deleteCharacter(id) {
+      this.characters = this.characters.filter((c) => c.id !== id)
+    },
+
     resetCharacter() {
-      this.name = ''
-      this.strength = 5
-      this.agility = 5
-      this.intelligence = 5
-      this.points = 10
+      this.currentCharacter = {
+        id: null,
+        name: '',
+        strength: 5,
+        agility: 5,
+        intelligence: 5,
+        points: 10,
+      }
     },
   },
 })
