@@ -1,5 +1,6 @@
 <script setup>
 import { useCharacterStore } from './stores/character'
+import CharacterNameInput from './components/CharacterNameInput.vue'
 
 const character = useCharacterStore()
 </script>
@@ -8,14 +9,7 @@ const character = useCharacterStore()
   <div class="flex min-h-screen flex-col items-center justify-center gap-4 bg-gray-700 text-white">
     <h1 class="p-4 text-3xl font-bold">Character Builder</h1>
 
-    <input
-      type="text"
-      placeholder="Enter Character Name"
-      class="rounded border-2 border-gray-400 p-4 px-3 py-2 text-white"
-      @input="character.setName($event.target.value)"
-    />
-
-    <p class="font-bold">Name: {{ character.name }}</p>
+    <CharacterNameInput />
 
     <div class="flex gap-6">
       <div>
