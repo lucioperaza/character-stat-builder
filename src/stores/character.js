@@ -45,12 +45,15 @@ export const useCharacterStore = defineStore('character', {
     saveCharacter() {
       if (!this.currentCharacter.name) return
 
-      const newCharacter = {
-        ...this.currentCharacter,
-        id: Date.now(),
+      if (this.currentCharacter.id) {
+        const index = this.characters.findIndex((c) => c.id === this.currentCharacter.id)
+        this.characters[index] = { ...this.currentCharacter }
+      } else {
+        this.characters.push({
+          ...this.currentCharacter,
+          id: Date.now(),
+        })
       }
-
-      this.characters.push(newCharacter)
       this.resetCharacter()
     },
 

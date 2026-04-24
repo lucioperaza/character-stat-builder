@@ -5,7 +5,7 @@ const character = useCharacterStore()
 </script>
 
 <template>
-  <div class="w-full rounded bg-gray-800 p-4">
+  <div class="max-h-75 w-full overflow-y-auto rounded bg-gray-800 p-4 md:max-h-125">
     <h2 class="mb-3 text-lg font-bold">Saved Characters</h2>
 
     <div v-if="character.characters.length === 0">
@@ -18,7 +18,13 @@ const character = useCharacterStore()
     >
       <div>
         <p class="font-semibold">{{ c.name }}</p>
-        <p class="text-sm">Total: {{ c.strength || 0 + c.agility || 0 + c.intelligence || 0 }}</p>
+        <p class="m-1 text-sm">Strength: {{ c.strength }}</p>
+        <p class="m-1 text-sm">Agility: {{ c.agility }}</p>
+        <p class="m-1 text-sm">Intelligence: {{ c.intelligence }}</p>
+        <p class="m-1 text-sm">
+          Total: {{ (c.strength || 0) + (c.agility || 0) + (c.intelligence || 0) }}
+        </p>
+        <p class="m-1 text-sm">Points Remaining: {{ c.points }}</p>
       </div>
 
       <div class="flex gap-2">
