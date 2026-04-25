@@ -24,6 +24,9 @@ export const useCharacterStore = defineStore('character', {
   },
 
   actions: {
+    saveToLocalStorage() {
+      localStorage.setItem('characters', JSON.stringify(this.characters))
+    },
     setName(newName) {
       this.currentCharacter.name = newName
     },
@@ -48,12 +51,14 @@ export const useCharacterStore = defineStore('character', {
       if (this.currentCharacter.id) {
         const index = this.characters.findIndex((c) => c.id === this.currentCharacter.id)
         this.characters[index] = { ...this.currentCharacter }
+        this.saveToLocalStorage()
       } else {
         this.characters.push({
           ...this.currentCharacter,
           id: Date.now(),
         })
       }
+      this.saveToLocalStorage()
       this.resetCharacter()
     },
 
@@ -70,9 +75,20 @@ export const useCharacterStore = defineStore('character', {
 
     deleteCharacter(id) {
       this.characters = this.characters.filter((c) => c.id !== id)
+      this.saveToLocalStorage()
     },
 
     resetCharacter() {
+      this.currentCharacter = {
+        id: this.currentCharacter.id,
+        name: this.currentCharacter.name,
+        strength: 5,
+        agility: 5,
+        intelligence: 5,
+        points: 10,
+      }
+    },
+    clearCharacter() {
       this.currentCharacter = {
         id: null,
         name: '',
