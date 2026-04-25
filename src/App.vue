@@ -1,8 +1,19 @@
 <script setup>
+import { onMounted } from 'vue'
+import { useCharacterStore } from './stores/character'
+
 import CharacterNameInput from './components/CharacterNameInput.vue'
 import StatControls from './components/StatControls.vue'
 import CharacterSummary from './components/CharacterSummary.vue'
 import CharacterList from './components/CharacterList.vue'
+
+const character = useCharacterStore()
+onMounted(() => {
+  const data = localStorage.getItem('characters')
+  if (data) {
+    character.characters = JSON.parse(data)
+  }
+})
 </script>
 
 <template>

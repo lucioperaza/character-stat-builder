@@ -21,5 +21,11 @@ const character = useCharacterStore()
     >
       Save Character
     </button>
+    <button
+      class="mt-3 rounded bg-yellow-500 px-4 py-2 hover:bg-yellow-600"
+      @click="character.clearCharacter"
+    >
+      New Character
+    </button>
   </div>
 </template>
